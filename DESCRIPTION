@@ -1,0 +1,21 @@
+Package: references
+Title: Provides templates for relatively vague but automated reference letter
+Version: 0.0.0.9000
+Date: 2022-04-01
+Authors@R: 
+    person(given = "Gianluca",
+           family = "Baio",
+           role = c("aut", "cre"),
+           email = "g.baio@ucl.ac.uk",
+           comment = c(ORCID = "0000-0003-4314-2570"))
+Description: Various templates for HoD letters of support for fellowships or other schems.
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.2
+Suggests: 
+    knitr,
+    rmarkdown,
+    tidyverse

@@ -1,0 +1,115 @@
+%% File: ``ucletter2.sty''
+
+\iffalse
+   
+   ucletter2 style file for Statistical Science
+   based on ucl-e-letter.sty copyright Kalvis M. Jansons, UCL Mathematics.
+
+   This file provides a simple style file that is roughly in the
+   spirit of UCL's new rules on identity.
+
+   Colour is allowed (see commented-out '\color' definitions at foot)
+   
+\fi
+
+\def\mytilde{{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}}
+
+\usepackage{graphicx}
+% want colour?
+\ifx\pdfoutput\@undefined\usepackage[usenames,dvips]{color}
+\else\usepackage[usenames,dvipsnames]{color}
+% and fix pdf colour problems
+\IfFileExists{pdfcolmk.sty}{\usepackage{pdfcolmk}}{} 
+\fi
+
+% Font related options
+\usepackage{helvet,inconsolata,fontawesome5}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Some helpful definitions
+\def\gbp{{\fontfamily{ptm}\selectfont \pounds}}
+%\def\gbp{{\fontfamily{ppl}\selectfont \pounds}}
+\def\title{INSERT YOUR TITLE}
+\def\name{INSERT YOUR NAME}
+\def\phone{+44 (0)20 YOUR NUMBER}
+\def\fax{+44 (0)20 7383 4703}
+\def\web{}
+\def\position{INSERT YOUR POSITION HERE}
+\def\institute{Department of Statistical Science}
+\def\zoom{https://ucl.zoom.us/j/INSERT YOUR ZOOM LINK}
+% \def\name{}
+% \def\phone{}
+% \def\fax{}
+% \def\web{}
+\def\sendto{}
+
+\def\today{
+  \number\day \space 
+  \ifcase\month\or
+  January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or December
+  \fi
+  \space \number\year
+}
+
+\catcode`\~=11
+
+
+\setlength\parindent{0in}
+\setlength\parskip{2ex}
+\setlength{\oddsidemargin}{-.3in}
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-1.4in}
+\setlength{\marginparwidth}{.7in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-2.5in}
+\setlength{\topmargin}{0in}
+
+\makeatletter
+
+\let\old@thefoot=\@thefoot
+
+\def\@thefoot%
+{ 
+  \ifnum\thepage=1
+  {
+    \parbox[b]{1.0\textwidth}
+    {
+      \vspace{0.5in}
+      \hrulefill \\
+        {\small
+        %\title\ 
+        \name, \textit{\position} \\ \institute\ \,\,|\,\,
+        University College London \,\,|\,\, Gower Street, London WC1E 6BT, UK \\
+        \faEnvelope\ \href{mailto:INSERT YOUR EMAIL}{\texttt{INSERT YOUR EMAIL}} \,\,|\,\, 
+        \faPhone\ \phone\ \,\,|\,\, %\faFax\ \fax\\
+        \faVideo\ \href{\zoom}{Call via Zoom} \\
+        \faFirefox\ \href{INSERT YOUR WEB}{\texttt{INSERT YOUR WEB}} \hfill
+%        \web
+      }
+    }\hfill
+  }
+  \else
+  \old@thefoot
+  \fi   
+}
+
+% Letterhead
+\def\start{
+\phantom{0}\vspace{-2cm}
+\begin{center}
+%\makebox[\textwidth]{\includegraphics[width=\paperwidth]{assets/ucletter2.pdf}}
+\makebox[\textwidth]{\includegraphics[width=\paperwidth]{\pathlogo}}
+\end{center}
+\vspace{-2.8cm}\textbf{DEPARTMENT OF STATISTICAL SCIENCE}\newline
+\vspace{2cm}
+}
+
+\makeatother
+
+\endinput
+
+%%
+%% End of file ``ucletter2.sty''

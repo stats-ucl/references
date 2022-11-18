@@ -1,0 +1,76 @@
+---
+title: ""
+author: YOUR NAME
+date: 
+params: 
+   addressee: "Whoever it needs to go to"
+   address: |
+      Address line 1,    
+      Address line 2,    
+      City
+   personSex: "Male"
+   personTitle: "Mr"
+   personName: "Name"
+   personSurname: "Surname"
+   programme: "The programme they apply for"
+   institution: "The institution they apply to"
+   interests: ""
+documentclass: article
+papersize: a4
+fontsize: 11pt
+output:
+  pdf_document:
+    includes: 
+       in_header: !expr system.file('assets/preamble.tex',package="references")
+    extra_dependencies: !expr tools::file_path_sans_ext(system.file('assets/ucletter2.sty',package="references"))
+header-includes: 
+   \def\pathlogo{`r system.file('assets/ucletter2.pdf',package="references")`}
+---
+
+```{r echo=F,message=FALSE,warning=FALSE,comment=NA}
+# Formats the date 
+# If the date is specified as a string (to a specific value), then use that, else use current date
+if(!is.null(rmarkdown::metadata$date)){date=rmarkdown::metadata$date} else {date=format(Sys.Date(),"%e %B %Y")}
+
+# Figures out title/pronouns etc based on sex
+if(rmarkdown::metadata$params$personSex=="Male") {pronoun="he"; adjective="him"; possessive="his"} else {pronoun="she"; adjective=possessive="her"}
+
+# A default blurb on interests, unless they've specified something different.
+if(nchar(rmarkdown::metadata$params$interests)==0){interests="various applications of statistical methodology"} else {interests=rmarkdown::metadata$params$interests}
+
+```
+
+\start
+
+`r rmarkdown::metadata$params$addressee`    
+`r rmarkdown::metadata$params$address`    
+`r rmarkdown::metadata$params$city`    
+
+`r date`    
+
+\vspace{12pt}
+
+**Letter of support --- `r rmarkdown::metadata$params$personTitle` `r rmarkdown::metadata$params$personName` `r rmarkdown::metadata$params$personSurname`**
+
+I understand that `r rmarkdown::metadata$params$personTitle` `r rmarkdown::metadata$params$personName` `r rmarkdown::metadata$params$personSurname` is in the process of applying for `r rmarkdown::metadata$params$programme` at `r rmarkdown::metadata$params$institution` and `r pronoun` has indicated me to provide a letter of support for `r possessive` application. 
+
+I have spoken to `r rmarkdown::metadata$params$personName` several times, as part of my duties as `r possessive` personal tutor. `r stringr::str_to_title(pronoun)` has sruck me, from our very first encounter, as a very focussed student, with clear ideas as to what `r possessive` academic life should bring `r adjective`.
+
+`r stringr::str_to_title(pronoun)` is trying to gather as much experience as possible in order to make up `r possessive` mind as to what career pathway `r pronoun` would like to go through. `r stringr::str_to_title(possessive)` career so far indicates that `r pronoun` is a bright student with a potential for excellent research outputs, given suitable supervision. `r stringr::str_to_title(pronoun)` has trained in different aspects of statistical modelling and has a keen interest in `r interests`; thus I believe that being hosted at `r rmarkdown::metadata$params$institution` will certainly be beneficial for `r adjective`, as I believe `r pronoun` will be able to draw on different levels of expertise and research interests to feed into `r possessive` own project. 
+
+I believe `r pronoun` will be a very good candidate to fill the position at your institution. `r stringr::str_to_title(pronoun)` is definitely eager to learn and apply `r possessive` strengths to relevant issues. Thus, I believe that `r pronoun` can succeed in getting a postgraduate degree and then contribute to the field as a good researcher.
+
+I hope you will seriously consider `r adjective` for this position. 
+
+Please do not hesitate to contact me if you require any further assistance.
+
+\vspace{20pt}
+Yours sincerely,
+
+\vspace{.1in}
+```{r signature,out.width="40%",echo=FALSE,warning=FALSE}
+# Signature
+knitr::include_graphics(system.file('assets/signature.jpg',package="references"))
+```
+
+\name
